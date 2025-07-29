@@ -1,0 +1,9 @@
+name: Generate README
+on:
+  push:
+  pull_request: { paths: ["README.md", "README.tmpl.md"] }
+  workflow_dispatch:
+jobs:
+  generate-readme:
+    permissions: { contents: write }
+    uses: aarondill/github-actions/.github/workflows/gen-readme.yml@main

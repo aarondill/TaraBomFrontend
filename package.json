@@ -46,4 +46,12 @@
 		"typescript-eslint": "^8.38.0"
 	},
 	"packageManager": "pnpm@10.13.1",
+	"targets": {
+		"main": {
+			"optimize": false,
+			"context": "node",
+			"isLibrary": false,
+			"includeNodeModules": true
+		}
+	}
 }

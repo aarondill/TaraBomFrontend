@@ -1,3 +1,4 @@
+import cssText from "bundle-text:./styles.css";
 type AppProps = { id?: string };
 export function App(params: AppProps) {
 	return (
@@ -7,6 +8,7 @@ export function App(params: AppProps) {
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<meta name="color-scheme" content="light dark" />
 				<title>BOM Retreiver</title>
+				<style>{cssText}</style>
 			</head>
 			<body>
 				<Index {...params} />
@@ -24,6 +26,28 @@ function Search() {
 	);
 }
 
+function Table() {
+	// TODO: Implement table
+	return (
+		<table>
+			<thead>
+				<th>Name</th>
+				<th>Some</th>
+				<th>Columns</th>
+				<th>With</th>
+				<th>Data</th>
+			</thead>
+			<tr>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+				<td>5</td>
+			</tr>
+		</table>
+	);
+}
+
 function Index(params: AppProps) {
 	if (!params.id) {
 		return <Search />;
@@ -34,6 +58,7 @@ function Index(params: AppProps) {
 			<Search />
 			<div>
 				<h1>Get Started with this id: {params.id}</h1>
+				<Table />
 			</div>
 		</div>
 	);

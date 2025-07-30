@@ -27,6 +27,7 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.32.0",
+		"@parcel/transformer-inline-string": "2.15.4",
 		"@types/express": "^5.0.3",
 		"@types/node": "^24.1.0",
 		"@types/react": "^19.1.9",

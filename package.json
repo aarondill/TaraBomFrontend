@@ -17,7 +17,7 @@
 		"lint:org-imports": "organize-imports-cli ./tsconfig.json",
 		"lint:prettier": "prettier . --write --log-level warn",
 		"lint:sort-package": "sort-package-json",
-		"start": "pnpm run build && node dist/server.js",
+		"start": "pnpm run build && node --enable-source-maps dist/server.js",
 		"watch": "node watch.mjs 'pnpm run --silent start' src/"
 	},
 	"dependencies": {
@@ -50,9 +50,8 @@
 	"targets": {
 		"main": {
 			"optimize": true,
-			"context": "node",
-			"isLibrary": false,
-			"includeNodeModules": true
+			"isLibrary": true,
+			"context": "node"
 		}
 	}
 }

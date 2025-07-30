@@ -12,12 +12,11 @@
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"isolatedModules": true,
-		"jsx": "preserve",
 		"incremental": true,
-		"paths": {
-			"@/*": ["./src/*"]
-		}
+		/* Preact Config */
+		"jsx": "react-jsx",
+		"jsxImportSource": "preact",
 	},
 	"include": ["**/*.ts", "**/*.tsx"],
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules"],
 }

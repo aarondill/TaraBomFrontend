@@ -19,9 +19,14 @@
 		"start": "node ./dist/server.js"
 	},
 	"dependencies": {
-		"react": "^19.1.1"
+		"express": "^5.1.0",
+		"preact": "^10.25.3",
+		"preact-render-to-string": "^6.5.13"
 	},
 	"devDependencies": {
+		"@types/express": "^5.0.3",
+		"@types/node": "^24.1.0",
+		"parcel": "^2.15.4",
 		"@eslint/js": "^9.32.0",
 		"@types/react": "^19.1.9",
 		"eslint": "^9.32.0",

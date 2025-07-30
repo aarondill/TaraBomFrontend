@@ -8,7 +8,8 @@ if (!cmd || !dir) {
 	process.exit(1);
 }
 
-let proc;
+/** @type {import("node:child_process").ChildProcess?} */
+let proc = null;
 function spawn() {
 	proc?.kill();
 	proc = cp.spawn(cmd, { shell: true, stdio: "inherit", windowsHide: true });

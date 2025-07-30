@@ -2,9 +2,8 @@ import express, { RequestHandler } from "express";
 import { renderToPipeableStream } from "react-dom/server";
 import { App } from ".";
 
-const handler: RequestHandler = async (req, res) => {
+const handler: RequestHandler = (req, res) => {
 	const { id } = req.params;
-	let timeout: NodeJS.Timeout;
 	const stream = renderToPipeableStream(<App id={id} />, {
 		// Use onShellReady instead to load faster, and show loading indicators (This requires JS on the client)
 		onAllReady() {
@@ -22,13 +21,13 @@ const handler: RequestHandler = async (req, res) => {
 				.send(`<!doctype html><p>An error ocurred:</p><pre>${message}</pre>`);
 		},
 	});
-	timeout = setTimeout(stream.abort, 20_000); // give up if it takes too long (20 seconds)
+	const timeout = setTimeout(stream.abort, 20_000); // give up if it takes too long (20 seconds)
 };
 
 const port = 3000;
 express()
 	// .use("/public", express.static("public"))
-	.use("/favicon.ico", (req, res) => res.sendStatus(404)) // don't render for favicon.ico (auto-requested by browser)
+	.use("/favicon.ico", (_req, res) => res.sendStatus(404)) // don't render for favicon.ico (auto-requested by browser)
 	.get("/search", function (req, res) {
 		const { id = "" } = req.query;
 		if (id && typeof id !== "string") {

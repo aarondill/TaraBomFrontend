@@ -1,0 +1,51 @@
+import express, { RequestHandler } from "express";
+import { renderToPipeableStream } from "preact-render-to-string/stream-node";
+import { App } from ".";
+
+const handler: RequestHandler = async (req, res) => {
+	const { id } = req.params;
+	let timeout: NodeJS.Timeout;
+	/* WARNING:
+	 * since we're not serving JS to the client, and it's seemingly impossible
+	 * to, resolve the async queue while rendering the page, we can't use async
+	 * Components. all async code must be done *here*, before calling
+	 * `renderToPipeableStream`, then passed to <App /> as a prop.
+	 */
+	const stream = renderToPipeableStream(<App id={id} />, {
+		onShellReady() {
+			console.log(`shell ready now`);
+		},
+		onAllReady() {
+			clearTimeout(timeout);
+			console.log(`all ready`);
+			stream.pipe(res.status(200).setHeader("Content-Type", "text/html"));
+		},
+		onError(error) {
+			res
+				.status(500)
+				.send(
+					`<!doctype html><p>An error ocurred:</p><pre>${error.message}</pre>`
+				);
+		},
+	});
+	timeout = setTimeout(stream.abort, 20_000); // give up if it takes too long (20 seconds)
+};
+
+const port = 3000;
+express()
+	// .use("/public", express.static("public"))
+	.use("/favicon.ico", (req, res) => res.sendStatus(404)) // don't render for favicon.ico (auto-requested by browser)
+	.get("/search", function (req, res) {
+		const { id = "" } = req.query;
+		if (id && typeof id !== "string") {
+			res.statusCode = 400;
+			res.send("id must be a string");
+			return;
+		}
+		res.redirect(`/${id}`);
+	})
+	.get("/", handler)
+	.get("/:id", handler)
+	.listen(port, () => {
+		console.log(`listening on port http://localhost:${port}`);
+	});

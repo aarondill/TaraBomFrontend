@@ -12,8 +12,8 @@ export default tseslint.config(
 		// react
 		files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
 		extends: [
-			react.configs.flat["jsx-runtime"],
 			react.configs.flat.recommended,
+			react.configs.flat["jsx-runtime"],
 		],
 		plugins: { react },
 		settings: {

@@ -63,5 +63,8 @@ export default tseslint.config(
 			"@typescript-eslint/explicit-function-return-type": "off",
 		},
 	},
-	prettier // Turn off rules that prettier covers
+	prettier, // Turn off rules that prettier covers
+	{
+		ignores: ["./dist", "./node_modules"],
+	}
 );

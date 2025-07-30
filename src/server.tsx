@@ -6,6 +6,7 @@ const handler: RequestHandler = async (req, res) => {
 	const { id } = req.params;
 	let timeout: NodeJS.Timeout;
 	const stream = renderToPipeableStream(<App id={id} />, {
+		// Use onShellReady instead to load faster, and show loading indicators (This requires JS on the client)
 		onAllReady() {
 			clearTimeout(timeout);
 			stream.pipe(res.status(200).setHeader("Content-Type", "text/html"));

@@ -24,7 +24,7 @@ function Search() {
 	);
 }
 
-async function Index(params: AppProps) {
+function Index(params: AppProps) {
 	if (!params.id) {
 		return <Search />;
 	}

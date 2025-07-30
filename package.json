@@ -48,7 +48,7 @@
 	"packageManager": "pnpm@10.13.1",
 	"targets": {
 		"main": {
-			"optimize": false,
+			"optimize": true,
 			"context": "node",
 			"isLibrary": false,
 			"includeNodeModules": true

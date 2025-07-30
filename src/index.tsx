@@ -31,19 +31,23 @@ function Table() {
 	return (
 		<table>
 			<thead>
-				<th>Name</th>
-				<th>Some</th>
-				<th>Columns</th>
-				<th>With</th>
-				<th>Data</th>
+				<tr>
+					<th>Name</th>
+					<th>Some</th>
+					<th>Columns</th>
+					<th>With</th>
+					<th>Data</th>
+				</tr>
 			</thead>
-			<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-			</tr>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+				</tr>
+			</tbody>
 		</table>
 	);
 }

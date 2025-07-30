@@ -12,7 +12,8 @@
 	"scripts": {
 		"start": "pnpm run build && node dist/server.js",
 		"build": "parcel build",
-		"watch": "watch 'pnpm run --silent start' src/ --wait=1",
+		"clean": "rimraf dist",
+		"watch": "node watch.mjs 'pnpm run --silent start' src/",
 		"lint": "pnpm run '/^lint:.*/'",
 		"lint:eslint": "eslint . --ext .ts,.tsx --fix",
 		"lint:org-imports": "organize-imports-cli ./tsconfig.json",
@@ -36,11 +37,11 @@
 		"organize-imports-cli": "^0.10.0",
 		"parcel": "^2.15.4",
 		"prettier": "^3.6.2",
+		"rimraf": "^6.0.1",
 		"sort-package-json": "^3.4.0",
 		"tsafe": "^1.8.5",
 		"typescript": "^5.8.3",
-		"typescript-eslint": "^8.38.0",
-		"watch": "^1.0.2"
+		"typescript-eslint": "^8.38.0"
 	},
 	"packageManager": "pnpm@10.13.1"
 }

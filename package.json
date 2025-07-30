@@ -12,8 +12,7 @@
 	"scripts": {
 		"start": "pnpm run build && node dist/server.js",
 		"build": "parcel build",
-		"watch": "parcel watch",
-
+		"watch": "watch 'pnpm run --silent start' src/ --wait=1",
 		"lint": "pnpm run '/^lint:.*/'",
 		"lint:eslint": "eslint . --ext .ts,.tsx --fix",
 		"lint:org-imports": "organize-imports-cli ./tsconfig.json",
@@ -26,21 +25,22 @@
 		"preact-render-to-string": "^6.5.13"
 	},
 	"devDependencies": {
+		"@eslint/js": "^9.32.0",
 		"@types/express": "^5.0.3",
 		"@types/node": "^24.1.0",
-		"parcel": "^2.15.4",
-		"@eslint/js": "^9.32.0",
 		"@types/react": "^19.1.9",
 		"eslint": "^9.32.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-react": "^7.37.5",
 		"globals": "^16.3.0",
 		"organize-imports-cli": "^0.10.0",
+		"parcel": "^2.15.4",
 		"prettier": "^3.6.2",
 		"sort-package-json": "^3.4.0",
 		"tsafe": "^1.8.5",
 		"typescript": "^5.8.3",
-		"typescript-eslint": "^8.38.0"
+		"typescript-eslint": "^8.38.0",
+		"watch": "^1.0.2"
 	},
 	"packageManager": "pnpm@10.13.1"
 }

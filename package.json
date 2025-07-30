@@ -2,21 +2,23 @@
 	"name": "TaraBomFrontend",
 	"version": "0.0.0",
 	"private": true,
+	"main": "dist/server.js",
+	"source": "src/server.tsx",
 	"description": "The frontend for TaraBom",
 	"repository": "https://github.com/aarondill/TaraBomFrontend",
 	"license": "MIT",
 	"author": "aarondill <aaronsacks2006@gmail.com>",
 	"type": "module",
 	"scripts": {
-		"build": "echo todo && exit 1",
-		"clean": "rimraf dist",
-		"dev": "echo todo && exit 1",
+		"start": "pnpm run build && node dist/server.js",
+		"build": "parcel build",
+		"watch": "parcel watch",
+
 		"lint": "pnpm run '/^lint:.*/'",
 		"lint:eslint": "eslint . --ext .ts,.tsx --fix",
 		"lint:org-imports": "organize-imports-cli ./tsconfig.json",
 		"lint:prettier": "prettier . --write --log-level warn",
-		"lint:sort-package": "sort-package-json",
-		"start": "node ./dist/server.js"
+		"lint:sort-package": "sort-package-json"
 	},
 	"dependencies": {
 		"express": "^5.1.0",
@@ -35,7 +37,6 @@
 		"globals": "^16.3.0",
 		"organize-imports-cli": "^0.10.0",
 		"prettier": "^3.6.2",
-		"rimraf": "^6.0.1",
 		"sort-package-json": "^3.4.0",
 		"tsafe": "^1.8.5",
 		"typescript": "^5.8.3",

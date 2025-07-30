@@ -18,7 +18,7 @@ const handler: RequestHandler = (req, res) => {
 			);
 			res
 				.status(500)
-				.send(`<!doctype html><p>An error ocurred:</p><pre>${message}</pre>`);
+				.send(`<!doctype html><p>An error occurred:</p><pre>${message}</pre>`);
 		},
 	});
 	const timeout = setTimeout(stream.abort, 20_000); // give up if it takes too long (20 seconds)

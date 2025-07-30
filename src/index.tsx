@@ -7,7 +7,7 @@ export function App(params: AppProps) {
 				<meta charSet="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<meta name="color-scheme" content="light dark" />
-				<title>BOM Retreiver</title>
+				<title>BOM Retriever</title>
 				<style>{cssText}</style>
 			</head>
 			<body>

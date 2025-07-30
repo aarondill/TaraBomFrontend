@@ -15,7 +15,7 @@
 		"incremental": true,
 		/* Preact Config */
 		"jsx": "react-jsx",
-		"jsxImportSource": "preact",
+		"jsxImportSource": "react",
 	},
 	"include": ["**/*.ts", "**/*.tsx"],
 	"exclude": ["node_modules"],

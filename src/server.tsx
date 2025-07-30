@@ -1,31 +1,24 @@
 import express, { RequestHandler } from "express";
-import { renderToPipeableStream } from "preact-render-to-string/stream-node";
+import { renderToPipeableStream } from "react-dom/server";
 import { App } from ".";
 
 const handler: RequestHandler = async (req, res) => {
 	const { id } = req.params;
 	let timeout: NodeJS.Timeout;
-	/* WARNING:
-	 * since we're not serving JS to the client, and it's seemingly impossible
-	 * to, resolve the async queue while rendering the page, we can't use async
-	 * Components. all async code must be done *here*, before calling
-	 * `renderToPipeableStream`, then passed to <App /> as a prop.
-	 */
 	const stream = renderToPipeableStream(<App id={id} />, {
-		onShellReady() {
-			console.log(`shell ready now`);
-		},
 		onAllReady() {
 			clearTimeout(timeout);
-			console.log(`all ready`);
 			stream.pipe(res.status(200).setHeader("Content-Type", "text/html"));
 		},
 		onError(error) {
+			const message = String(
+				error && typeof error === "object" && "message" in error
+					? error.message
+					: error
+			);
 			res
 				.status(500)
-				.send(
-					`<!doctype html><p>An error ocurred:</p><pre>${error.message}</pre>`
-				);
+				.send(`<!doctype html><p>An error ocurred:</p><pre>${message}</pre>`);
 		},
 	});
 	timeout = setTimeout(stream.abort, 20_000); // give up if it takes too long (20 seconds)

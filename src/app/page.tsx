@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { fetchFromRetriever } from "./actions";
 import { Output } from "./types";
 
@@ -39,7 +40,9 @@ function BillOfMaterials(props: {
 										const apiUrl = "./pdf/api?" + searchParams.toString();
 										return (
 											<li key={a.file_name}>
-												<a href={apiUrl.toString()}>{a.file_name}</a>
+												<Link target="_blank" href={apiUrl.toString()}>
+													{a.file_name}
+												</Link>
 											</li>
 										);
 									})}

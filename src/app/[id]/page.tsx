@@ -38,6 +38,7 @@ export default async function App(props: { params: Promise<{ id: string }> }) {
 	try {
 		response = await fetch(url);
 	} catch (e) {
+		console.error(e);
 		if (
 			isNativeError(e) &&
 			isNativeError(e.cause) &&

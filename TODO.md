@@ -1,9 +1,5 @@
 ## Todo:
 
-- Express server (hello world)
-- bundler & compiler
-  - preact + vite?
-- React backend (hello world) - stream through express
-- Fetch to server (in arg)
+- Fetch to server
 - Render to tables
-- Form to move to /id
+- Pop-up for pdf (download on server and stream to browser)

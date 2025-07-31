@@ -76,13 +76,13 @@ function ProductInfo(props: { data: Output; id: string }) {
 }
 
 export default async function App(props: {
-	searchParams: Promise<{ id?: string | string[] }>;
+	searchParams: Promise<{ ID?: string | string[] }>;
 }) {
 	const searchParams = await props.searchParams;
-	if (typeof searchParams.id !== "string") {
+	if (typeof searchParams.ID !== "string") {
 		return <div>Error: No ID specified</div>;
 	}
-	const id = decodeURIComponent(searchParams.id);
+	const id = decodeURIComponent(searchParams.ID);
 	const data = await fetchFromRetriever(id);
 	if (typeof data === "string") {
 		return <div>Error: {data}</div>;

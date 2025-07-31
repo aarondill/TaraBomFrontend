@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 function Search() {
 	return (
 		<form method="GET" action="/">
-			<input type="text" name="id" placeholder="BOM ID" />
+			<input type="text" name="ID" placeholder="BOM ID" />
 			<button type="submit">Search</button>
 		</form>
 	);

@@ -26,12 +26,14 @@ function Table() {
 	);
 }
 
-export default function App({ params }: { params: { id?: string } }) {
-	if (!params.id) return null;
+export default async function App(props: { params: Promise<{ id?: string }> }) {
+	const { id } = await props.params;
+
+	if (!id) return null;
 	return (
 		<div>
 			<div>
-				<h1>Get Started with this id: {params.id}</h1>
+				<h1>Get Started with this id: {id}</h1>
 				<Table />
 			</div>
 		</div>

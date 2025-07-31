@@ -1,33 +1,17 @@
+import { FlatCompat } from "@eslint/eslintrc";
 import eslint from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
 import prettier from "eslint-config-prettier";
-import react from "eslint-plugin-react";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
 	eslint.configs.recommended,
 	...tseslint.configs.recommendedTypeChecked,
+	...new FlatCompat({ baseDirectory: import.meta.dirname }).extends(
+		"next/core-web-vitals"
+	),
 	{
-		// react
-		files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
-		extends: [
-			react.configs.flat.recommended,
-			react.configs.flat["jsx-runtime"],
-		],
-		plugins: { react },
-		settings: {
-			react: { version: "detect" },
-		},
-		languageOptions: {
-			parserOptions: { ecmaFeatures: { jsx: true } },
-		},
-		rules: {
-			"react/no-unused-prop-types": "warn",
-		},
-	},
-	{
-		// TS support
 		languageOptions: {
 			globals: { ...globals.browser, ...globals.node },
 			parser: tsParser,
@@ -36,10 +20,10 @@ export default tseslint.config(
 				impliedStrict: true,
 			},
 		},
-	},
-	{
-		// TS rules
+
 		rules: {
+			"react/no-unused-prop-types": "warn",
+
 			"@typescript-eslint/no-misused-promises": [
 				"error",
 				{ checksVoidReturn: false },
@@ -60,11 +44,10 @@ export default tseslint.config(
 		files: ["**/*.js"],
 		extends: [tseslint.configs.disableTypeChecked],
 		rules: {
+			"other-plugin/typed-rule": "off",
 			"@typescript-eslint/explicit-function-return-type": "off",
 		},
 	},
-	prettier, // Turn off rules that prettier covers
-	{
-		ignores: ["./dist", "./node_modules"],
-	}
+	// Turn off rules that prettier covers
+	prettier
 );

@@ -1,22 +1,5 @@
-import cssText from "bundle-text:./styles.css";
-type AppProps = { id?: string };
-export function App(params: AppProps) {
-	return (
-		<html lang="en">
-			<head>
-				<meta charSet="UTF-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<meta name="color-scheme" content="light dark" />
-				<title>BOM Retriever</title>
-				<style>{cssText}</style>
-			</head>
-			<body>
-				<Index {...params} />
-			</body>
-		</html>
-	);
-}
-
+// import cssText from "bundle-text:./styles.css";
+/* <style>{cssText}</style> */
 function Search() {
 	return (
 		<form method="GET" action="/search">
@@ -52,7 +35,7 @@ function Table() {
 	);
 }
 
-function Index(params: AppProps) {
+export default function App(params: { id?: string }) {
 	if (!params.id) {
 		return <Search />;
 	}

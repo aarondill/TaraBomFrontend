@@ -24,11 +24,13 @@ export async function GET(request: NextRequest) {
 	}
 
 	console.log("Fetching document from", docUrl);
-	return await fetch(docUrl, {
-		headers: { "Content-Type": "application/pdf" },
-	})
+	return await fetch(docUrl)
 		.then(res => {
 			if (!res.ok) return new Response(res.statusText, { status: res.status });
+			console.log(
+				"Document fetched: Content-Type is",
+				res.headers.get("Content-Type")
+			);
 			return new Response(res.body, {
 				headers: { "Content-Type": "application/pdf" },
 			});

@@ -37,7 +37,7 @@ function BillOfMaterials(props: {
 									{r.attachments.map(a => {
 										const searchParams = new URLSearchParams();
 										searchParams.set("docUrl", a.url);
-										const apiUrl = "./pdf/api?" + searchParams.toString();
+										const apiUrl = "./pdf?" + searchParams.toString();
 										return (
 											<li key={a.file_name}>
 												<Link target="_blank" href={apiUrl.toString()}>

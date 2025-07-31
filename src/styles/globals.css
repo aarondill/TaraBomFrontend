@@ -42,6 +42,9 @@ table {
 		}
 		tr:hover td {
 			background-color: #f8bd7f;
+			@media (prefers-color-scheme: dark) {
+				background-color: #5f3d19;
+			}
 		}
 	}
 }

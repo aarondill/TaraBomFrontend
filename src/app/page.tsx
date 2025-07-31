@@ -33,11 +33,16 @@ function BillOfMaterials(props: {
 							<td>{r.QtyStr}</td>
 							<td>
 								<ul>
-									{r.attachments.map(a => (
-										<li key={a.file_name}>
-											<a href={a.url}>{a.file_name}</a>
-										</li>
-									))}
+									{r.attachments.map(a => {
+										const searchParams = new URLSearchParams();
+										searchParams.set("docUrl", a.url);
+										const apiUrl = "./pdf/api?" + searchParams.toString();
+										return (
+											<li key={a.file_name}>
+												<a href={apiUrl.toString()}>{a.file_name}</a>
+											</li>
+										);
+									})}
 								</ul>
 							</td>
 						</tr>

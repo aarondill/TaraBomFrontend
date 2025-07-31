@@ -1,3 +1,4 @@
+"use server";
 const RETRIEVER_SERVER_ADDRESS = process.env.RETRIEVER_SERVER_ADDRESS;
 import { isNativeError } from "node:util/types";
 import { Output } from "./types";

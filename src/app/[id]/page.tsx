@@ -1,7 +1,7 @@
 import { fetchFromRetriever } from "./actions";
 
 export default async function App(props: { params: Promise<{ id: string }> }) {
-	const { id } = await props.params;
+	const id = await props.params.then(({ id }) => decodeURIComponent(id));
 	const data = await fetchFromRetriever(id);
 	if (typeof data === "string") {
 		return <div>Error: {data}</div>;

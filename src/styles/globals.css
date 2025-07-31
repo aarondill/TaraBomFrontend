@@ -26,9 +26,14 @@ table {
 		td:first-of-type {
 			border-left: 2px solid #b3b3b3bb;
 		}
+
 		tr:nth-of-type(even) {
 			background-color: #f3f3f3;
+			@media (prefers-color-scheme: dark) {
+				background-color: #1e1e1e;
+			}
 		}
+
 		tr:last-of-type {
 			border-bottom: 3px solid #51adcf;
 		}
@@ -39,4 +44,8 @@ table {
 			background-color: #f8bd7f;
 		}
 	}
+}
+
+html {
+	color-scheme: light dark;
 }

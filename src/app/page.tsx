@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { fetchFromRetriever } from "./actions";
 import { Output } from "./types";
 
@@ -33,11 +34,18 @@ function BillOfMaterials(props: {
 							<td>{r.QtyStr}</td>
 							<td>
 								<ul>
-									{r.attachments.map(a => (
-										<li key={a.file_name}>
-											<a href={a.url}>{a.file_name}</a>
-										</li>
-									))}
+									{r.attachments.map(a => {
+										const searchParams = new URLSearchParams();
+										searchParams.set("docUrl", a.url);
+										const apiUrl = "./pdf?" + searchParams.toString();
+										return (
+											<li key={a.file_name}>
+												<Link target="_blank" href={apiUrl.toString()}>
+													{a.file_name}
+												</Link>
+											</li>
+										);
+									})}
 								</ul>
 							</td>
 						</tr>

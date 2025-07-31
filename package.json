@@ -22,7 +22,8 @@
 	"dependencies": {
 		"next": "^15.4.5",
 		"react": "^19.1.1",
-		"react-dom": "^19.1.1"
+		"react-dom": "^19.1.1",
+		"react-pdf": "^10.0.1"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.1",

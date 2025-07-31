@@ -79,9 +79,10 @@ export default async function App(props: {
 	searchParams: Promise<{ ID?: string | string[] }>;
 }) {
 	const searchParams = await props.searchParams;
-	if (typeof searchParams.ID !== "string") {
-		return <div>Error: No ID specified</div>;
-	}
+	if (!searchParams.ID) return null; // only display the search bar
+	if (typeof searchParams.ID !== "string")
+		return <div>Error: Invalid ID type</div>;
+
 	const id = decodeURIComponent(searchParams.ID);
 	const data = await fetchFromRetriever(id);
 	if (typeof data === "string") {

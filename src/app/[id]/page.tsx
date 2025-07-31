@@ -1,7 +1,4 @@
-import { isNativeError } from "node:util/types";
-import { Output } from "./types";
-
-const RETRIEVER_SERVER_ADDRESS = process.env.RETRIEVER_SERVER_ADDRESS;
+import { fetchFromRetriever } from "./actions";
 
 function Table() {
 	// TODO: Implement table
@@ -31,31 +28,10 @@ function Table() {
 
 export default async function App(props: { params: Promise<{ id: string }> }) {
 	const { id } = await props.params;
-
-	const url = new URL(id, RETRIEVER_SERVER_ADDRESS);
-	let response;
-
-	try {
-		response = await fetch(url);
-	} catch (e) {
-		console.error(e);
-		if (
-			isNativeError(e) &&
-			isNativeError(e.cause) &&
-			"code" in e.cause &&
-			e.cause.code === "ECONNREFUSED"
-		) {
-			return <div>Error: Could not connect to retriever server</div>;
-		}
-		return <div>Error: {isNativeError(e) ? e.message : String(e)}</div>;
+	const data = fetchFromRetriever(id);
+	if (typeof data === "string") {
+		return <div>Error: {data}</div>;
 	}
-
-	const status = response.status;
-	if (status !== 200) {
-		return <div>Error: {await response.text()}</div>;
-	}
-
-	const data = (await response.json()) as Output;
 	return (
 		<div>
 			<div>

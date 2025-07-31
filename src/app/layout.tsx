@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
 	title: "BOM Retriever",
@@ -29,3 +29,7 @@ export default function RootLayout({
 		</html>
 	);
 }
+
+export const viewport: Viewport = {
+	initialScale: -1,
+};

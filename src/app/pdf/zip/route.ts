@@ -4,7 +4,7 @@ import { ZipWriter } from "@zip.js/zip.js";
 import { NextRequest } from "next/server";
 
 type FileDownload = { blob: Blob; name: string };
-async function zip(files: FileDownload[], signal?: AbortSignal) {
+function zip(files: FileDownload[], signal?: AbortSignal) {
 	const zipFileStream = new TransformStream();
 
 	const zipWriter = new ZipWriter(zipFileStream.writable, {
@@ -12,10 +12,12 @@ async function zip(files: FileDownload[], signal?: AbortSignal) {
 		level: 0,
 		signal,
 	});
-	await Promise.all(
+	console.log("Adding files to zip");
+	void Promise.all(
 		files.map(file => zipWriter.add(file.name, file.blob.stream()))
-	);
-	void zipWriter.close();
+	)
+		.then(() => console.log("Finished adding files to zip"))
+		.then(() => zipWriter.close());
 	return zipFileStream.readable;
 }
 
@@ -44,15 +46,12 @@ export async function GET(request: NextRequest) {
 	)
 		.then(
 			blobs => {
-				return zip(blobs, request.signal).then(
-					zipStream =>
-						new Response(zipStream, {
-							headers: {
-								"Content-Type": "application/zip",
-								"Content-Disposition": `attachment; filename=${id}.zip`,
-							},
-						})
-				);
+				return new Response(zip(blobs, request.signal), {
+					headers: {
+						"Content-Type": "application/zip",
+						"Content-Disposition": `attachment; filename=${id}.zip`,
+					},
+				});
 			},
 			e => getErrorResponse(e, "Failed to fetch document")
 		)

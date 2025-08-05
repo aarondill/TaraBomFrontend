@@ -9,7 +9,11 @@ export async function fetchFromRetriever(id: string): Promise<string | Output> {
 	let response;
 
 	try {
-		response = await fetch(url);
+		// Cache the response for 1 hour
+		response = await fetch(url, {
+			next: { revalidate: 60 * 60 },
+			cache: "force-cache",
+		});
 	} catch (e) {
 		console.error(e);
 		if (

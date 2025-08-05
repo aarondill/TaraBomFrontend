@@ -1,14 +1,5 @@
+import { stringifyError } from "@/utils";
 import { NextRequest } from "next/server";
-import { isNativeError } from "node:util/types";
-
-const stringifyError = (e: unknown): string => {
-	if (typeof e === "string") return e;
-	if (!isNativeError(e)) return String(e);
-
-	const msg = `${e.name}: ${e.message}`;
-	if (e.cause) return `${msg}\nCaused by: ${stringifyError(e.cause)}`;
-	return msg;
-};
 
 export async function GET(request: NextRequest) {
 	const docUrl = request.nextUrl.searchParams.get("docUrl");

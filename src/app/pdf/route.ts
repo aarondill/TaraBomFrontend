@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
 	}
 
 	console.log("Fetching document from", docUrl);
-	return await fetch(docUrl)
+	return await fetch(docUrl, { signal: request.signal })
 		.then(res => {
 			if (!res.ok) return new Response(res.statusText, { status: res.status });
 			console.log(

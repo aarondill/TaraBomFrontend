@@ -8,3 +8,16 @@ export function stringifyError(e: unknown): string {
 	if (e.cause) return `${msg}\nCaused by: ${stringifyError(e.cause)}`;
 	return msg;
 }
+
+export function getErrorResponse(e: unknown, message: string) {
+	const status =
+		e instanceof Error &&
+		e.cause instanceof Error &&
+		"code" in e.cause &&
+		e.cause.code === "ENOTFOUND"
+			? 404 // The address doesn't exist / isn't reachable
+			: 500; // anything else is a server error
+	return new Response(`${message}: ${stringifyError(e)}`, {
+		status,
+	});
+}

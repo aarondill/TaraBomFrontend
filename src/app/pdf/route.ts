@@ -1,4 +1,4 @@
-import { stringifyError } from "@/utils";
+import { getErrorResponse } from "@/utils";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -26,16 +26,5 @@ export async function GET(request: NextRequest) {
 				headers: { "Content-Type": "application/pdf" },
 			});
 		})
-		.catch(e => {
-			const status =
-				e instanceof Error &&
-				e.cause instanceof Error &&
-				"code" in e.cause &&
-				e.cause.code === "ENOTFOUND"
-					? 404 // The address doesn't exist / isn't reachable
-					: 500; // anything else is a server error
-			return new Response(`Failed to fetch document: ${stringifyError(e)}`, {
-				status,
-			});
-		});
+		.catch(e => getErrorResponse(e, "Failed to fetch document"));
 }

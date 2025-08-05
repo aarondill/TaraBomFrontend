@@ -96,14 +96,22 @@ export default async function App(props: {
 	if (typeof data === "string") {
 		return <div>Error: {data}</div>;
 	}
+
 	return (
-		<div>
+		<>
+			<a
+				style={{ float: "right" }}
+				href={`./pdf/zip?ID=${id}`}
+				download
+				target="_blank">
+				Download Attachments
+			</a>
 			<div style={{ display: "flex", flexDirection: "column", gap: "1em" }}>
 				<ProductInfo data={data} id={id} />
 				{data.bill_of_materials.length > 0 && (
 					<BillOfMaterials bill_of_materials={data.bill_of_materials} />
 				)}
 			</div>
-		</div>
+		</>
 	);
 }

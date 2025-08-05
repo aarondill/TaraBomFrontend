@@ -99,11 +99,7 @@ export default async function App(props: {
 
 	return (
 		<>
-			<a
-				style={{ float: "right" }}
-				href={`./pdf/zip?ID=${id}`}
-				download
-				target="_blank">
+			<a style={{ float: "right" }} href={`./pdf/zip?ID=${id}`} target="_blank">
 				Download Attachments
 			</a>
 			<div style={{ display: "flex", flexDirection: "column", gap: "1em" }}>
